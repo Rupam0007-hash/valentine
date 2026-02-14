@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: black;
+  color: white;
+  text-align: center;
+}
+
+/* ⭐ Star Background */
+.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+/* Main Container */
+.container {
+  position: relative;
+  top: 10vh;
+  z-index: 2;
+  animation: fadeIn 3s ease-in-out;
+}
+
+h1 {
+  font-size: 40px;
+  text-shadow: 0 0 20px pink;
+}
+
+/* Typing Effect */
+.typing {
+  font-size: 24px;
+  width: 80%;
+  margin: auto;
+  border-right: 3px solid pink;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Slideshow */
+.slideshow {
+  margin-top: 30px;
+}
+
+.slideshow img {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px pink;
+  display: none;
+}
+
+.slideshow img.active {
+  display: block;
+  animation: fadeIn 2s ease-in-out;
+}
+
+/* Floating Hearts */
+.heart {
+  position: absolute;
+  color: pink;
+  font-size: 20px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="container">
+
+  <!-- ❤️ CUSTOMIZE NAME HERE ❤️ -->
+  <h1>Happy Valentine's Day, My Amrita 💖</h1>
+
+  <!-- ❤️ CUSTOMIZE PROPOSAL MESSAGE HERE ❤️ -->
+  <div class="typing" id="typingText"></div>
+
+  <!-- ❤️ ADD YOUR PHOTOS HERE ❤️ -->
+  <div class="slideshow">
+    <img src="1.jpg" class="active">
+    <img src="2.jpg" class="acyive">
+    <img src="3.jpg" class="acyive">
+  </div>
+
+</div>
+
+<!-- ❤️ ADD YOUR MUSIC FILE ❤️ -->
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mp3">
+</audio>
+<script>
+document.body.addEventlistener("click", fuction() {
+   document.getElementById("bgMusic").play();
+});
+</script>
+
+<script>
+/* ⭐ Generate Stars */
+for (let i = 0; i < 200; i++) {
+  let star = document.createElement("div");
+  star.className = "star";
+  star.style.top = Math.random() * 100 + "vh";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.animationDuration = Math.random() * 2 + 1 + "s";
+  document.querySelector(".stars").appendChild(star);
+}
+
+/* 💖 Floating Hearts */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+setInterval(createHeart, 300);
+
+/* ⌨️ Typing Effect */
+const message = "I want to creat all my remaining memories with you. wil you? 💍❤️";
+let index = 0;
+
+function typeEffect() {
+  if (index < message.length) {
+    document.getElementById("typingText").innerHTML += message.charAt(index);
+    index++;
+    setTimeout(typeEffect, 60);
+  }
+}
+typeEffect();
+
+/* 📸 Slideshow */
+let slides = document.querySelectorAll(".slideshow img");
+let current = 0;
+
+setInterval(() => {
+  slides[current].classList.remove("active");
+  current = (current + 1) % slides.length;
+  slides[current].classList.add("active");
+}, 3000);
+
+</script>
+
+</body>
+</html>
